@@ -119,6 +119,14 @@ MCP configuration:
 - Name: `swapi-pilot`
 - URL: `https://swapi-pilot.com/mcp`
 
+### Verify a New Chat Session
+
+When starting a new conversation in the SwpilotCLI pane, verify the CLI and MCP connection before sending a modifying request:
+
+1. **Confirm the CLI is ready.** Wait until the pane returns to an input prompt and no longer shows `Working`, `Starting`, or an error. Confirm that the selected tool is `codex` and the working directory is `C:\SwpilotCLI`. If supported by the CLI, run `/status` and confirm that an active session and the expected model are shown.
+2. **Confirm MCP is connected.** Run `/mcp` and verify that `swapi-pilot` is listed as connected and healthy. If it is missing, disconnected, or still initializing, the session cannot call SolidWorks through MCP.
+3. **Run a harmless SolidWorks test.** Send: `Run a read-only active-document check. Report only the active document title, type, and path. Do not modify or save anything.` A response with the current SolidWorks document confirms the complete chain from the new CLI session through MCP to SolidWorks.
+
 ---
 
 ## Interface Overview

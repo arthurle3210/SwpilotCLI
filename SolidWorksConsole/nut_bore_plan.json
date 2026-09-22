@@ -1,0 +1,9 @@
+{
+  "entities": [
+    { "id": "C1", "type": "circle", "center": [0.0, 0.0], "radius": 8.334375 }
+  ],
+  "anchor": { "ref": "C1.center", "to": "origin" },
+  "dimensions": [
+    { "ref": "C1", "type": "radius", "value": 8.334375 }
+  ]
+}
