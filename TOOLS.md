@@ -81,6 +81,12 @@ User-defined tools that extend SwpilotCLI functionality. Place your custom tools
 
 **Path**: `./sup_tools/swpilotcli-cutlist-body-step/`
 
+### swpilotcli-delete-file-properties
+
+**Description**: Delete every document-level (file-level) custom property from the active SolidWorks document while leaving every configuration-level custom property untouched. Defaults to a read-only dry run; use apply to make changes. Does not save the document.
+
+**Path**: `./sup_tools/swpilotcli-delete-file-properties/`
+
 ### swpilotcli-delete-orphan-sketches
 
 **Description**: Delete all orphaned sketches in the active SolidWorks part â€” sketch features not absorbed by any extrusion, cut, or other parent feature. Iterates the feature tree, removes every top-level `ProfileFeature`, then rebuilds. Use for cleanup after discarded geometry experiments, or to remove leftover construction sketches before saving.
@@ -398,5 +404,5 @@ A: Claude reads this TOOLS.md file and can access any tool directory via bash. S
 
 ## Last Updated
 
-- **Generated**: 2026-09-18 15:23:30
-- **Tools**: 2 Main + 39 Sup tools
+- **Generated**: 2026-09-22 13:48:35
+- **Tools**: 2 Main + 40 Sup tools
