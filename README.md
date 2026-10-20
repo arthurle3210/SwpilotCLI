@@ -39,7 +39,7 @@ The SwpilotCLI workflow is simple:
 
 ### 1. SwpilotCLI：Drop in a hand-drawn sketch and AI instantly generates a SolidWorks part
 
-[![SwpilotCLI: Drop in a hand-drawn sketch and AI instantly generates a SolidWorks part](https://img.youtube.com/vi/NmeGahaNNik/hqdefault.jpg)](https://youtu.be/NmeGahaNNik)
+[![SwpilotCLI: Drop in a hand-drawn sketch and AI instantly generates a SolidWorks part](https://img.youtube.com/vi/8TESLLgYXSg/hqdefault.jpg)](https://www.youtube.com/watch?v=8TESLLgYXSg)
 
 ```text
 prompt:

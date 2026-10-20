@@ -39,7 +39,7 @@ SwpilotCLI 的使用流程其實非常簡單，只有三個步驟：
 
 ### 1. 丟一張手繪圖給 AI，直接生成 SolidWorks 零件
 
-[![SwpilotCLI：丟一張手繪圖給 AI，直接生成 SolidWorks 零件](https://img.youtube.com/vi/NmeGahaNNik/hqdefault.jpg)](https://youtu.be/NmeGahaNNik)
+[![SwpilotCLI：丟一張手繪圖給 AI，直接生成 SolidWorks 零件](https://img.youtube.com/vi/8TESLLgYXSg/hqdefault.jpg)](https://www.youtube.com/watch?v=8TESLLgYXSg)
 
 ```text
 prompt:
