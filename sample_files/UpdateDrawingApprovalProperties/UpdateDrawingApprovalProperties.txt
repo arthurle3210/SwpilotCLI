@@ -1,0 +1,37 @@
+Option Explicit
+
+' SolidWorks VBA macro source
+' Applies document-level approval properties to the active drawing only.
+
+Dim swApp As SldWorks.SldWorks
+Dim swModel As SldWorks.ModelDoc2
+Dim swCustomProperties As SldWorks.CustomPropertyManager
+
+Sub main()
+    Set swApp = Application.SldWorks
+    Set swModel = swApp.ActiveDoc
+
+    If swModel Is Nothing Then
+        MsgBox "No active SolidWorks document.", vbExclamation, "Update Drawing Properties"
+        Exit Sub
+    End If
+
+    If swModel.GetType <> swDocDRAWING Then
+        MsgBox "This macro can only run on an active .slddrw drawing document.", vbExclamation, "Update Drawing Properties"
+        Exit Sub
+    End If
+
+    ' An empty configuration name selects document-level custom properties.
+    Set swCustomProperties = swModel.Extension.CustomPropertyManager("")
+
+    swCustomProperties.Add3 "DrawnBy", swCustomInfoText, "B.M.", swCustomPropertyReplaceValue
+    swCustomProperties.Add3 "CheckedBy", swCustomInfoText, "C.B.", swCustomPropertyReplaceValue
+    swCustomProperties.Add3 "ApprovedBy", swCustomInfoText, "C.B.", swCustomPropertyReplaceValue
+    ' Build the date with literal slashes; VBA's "/" format token follows the Windows regional separator.
+    swCustomProperties.Add3 "DrawnDate", swCustomInfoText, _
+        Format$(Month(Date), "00") & "/" & Format$(Day(Date), "00") & "/" & CStr(Year(Date)), _
+        swCustomPropertyReplaceValue
+
+    swModel.GraphicsRedraw2
+    MsgBox "Drawing approval properties updated. The drawing has not been saved.", vbInformation, "Update Drawing Properties"
+End Sub

@@ -22,7 +22,7 @@ Built-in tools maintained as part of SwpilotCLI. These are always available and 
 
 ### swpilotcli-eye-screenshot
 
-**Description**: YOUR EYES. Use this tool whenever you need to see the screen ??do NOT say you cannot see or take screenshots. Run this first, then use the Read tool on ./temp/screenshot/screenshot.png to view the image. Use when: user asks what is on screen, you want to verify code execution results, or you need visual context before deciding next steps.
+**Description**: YOUR EYES. Use this tool whenever you need to see the screen â€” do NOT say you cannot see or take screenshots. Run this first, then use the Read tool on ./temp/screenshot/screenshot.png to view the image. Use when: user asks what is on screen, you want to verify code execution results, or you need visual context before deciding next steps.
 
 **Path**: `./main_tools/swpilotcli-eye-screenshot/`
 
@@ -57,15 +57,39 @@ User-defined tools that extend SwpilotCLI functionality. Place your custom tools
 
 **Path**: `./sup_tools/swpilotcli-check-dangling-dims/`
 
+### swpilotcli-clean-dangling
+
+**Description**: Delete only dangling dimensions, balloons, centerlines, and center marks from the active SolidWorks drawing. Reports candidate and deletion counts by annotation type and does not save. Use as an atomic drawing-cleanup step after reviewing a drawing or before release.
+
+**Path**: `./sup_tools/swpilotcli-clean-dangling/`
+
 ### swpilotcli-close-doc
 
 **Description**: Close SolidWorks document(s). Supports three modes via argument: no argument or "nosave" closes the active document without saving; "save" silently saves then closes the active document (if file has never been saved, forces close without saving); "all" closes every open document without saving. Use when the user wants to close the current file, close and save, or close everything.
 
 **Path**: `./sup_tools/swpilotcli-close-doc/`
 
+### swpilotcli-custom-properties
+
+**Description**: Read custom properties from the active SolidWorks document at file level and across every configuration. Lists raw and resolved values, with an optional case-insensitive property-name filter. Use to inspect BOM metadata, descriptions, part numbers, materials, revisions, or other custom properties without modifying the model.
+
+**Path**: `./sup_tools/swpilotcli-custom-properties/`
+
+### swpilotcli-cutlist-body-step
+
+**Description**: Process one cut-list item into a one-body configuration in the active SolidWorks multibody part. Safely resumes partial work: creates bodyNN and KeepBody_bodyNN only when missing, preserves all design-intent Delete/Keep Body features, uses staged configuration waits, verifies EditRebuild3, and confirms one retained solid body. Run dry-run first; use apply <index> for one item at a time.
+
+**Path**: `./sup_tools/swpilotcli-cutlist-body-step/`
+
+### swpilotcli-delete-file-properties
+
+**Description**: Delete every document-level (file-level) custom property from the active SolidWorks document while leaving every configuration-level custom property untouched. Defaults to a read-only dry run; use apply to make changes. Does not save the document.
+
+**Path**: `./sup_tools/swpilotcli-delete-file-properties/`
+
 ### swpilotcli-delete-orphan-sketches
 
-**Description**: Delete all orphaned sketches in the active SolidWorks part ??sketch features not absorbed by any extrusion, cut, or other parent feature. Iterates the feature tree, removes every top-level `ProfileFeature`, then rebuilds. Use for cleanup after discarded geometry experiments, or to remove leftover construction sketches before saving.
+**Description**: Delete all orphaned sketches in the active SolidWorks part â€” sketch features not absorbed by any extrusion, cut, or other parent feature. Iterates the feature tree, removes every top-level `ProfileFeature`, then rebuilds. Use for cleanup after discarded geometry experiments, or to remove leftover construction sketches before saving.
 
 **Path**: `./sup_tools/swpilotcli-delete-orphan-sketches/`
 
@@ -107,13 +131,19 @@ User-defined tools that extend SwpilotCLI functionality. Place your custom tools
 
 ### swpilotcli-feature-hole-wizard-straight-tap
 
-**Description**: Create a HoleWizard ISO Straight Tap feature on a specified face at one or more positions. Selects the face programmatically by world coordinates ??no manual pre-selection required. Supports any metric size (M3?12), blind depth in mm, or through-all. Use when the user asks to add tapped holes, M-size threaded holes, or straight taps to a face.
+**Description**: Create a HoleWizard ISO Straight Tap feature on a specified face at one or more positions. Selects the face programmatically by world coordinates â€” no manual pre-selection required. Supports any metric size (M3â€“M12), blind depth in mm, or through-all. Use when the user asks to add tapped holes, M-size threaded holes, or straight taps to a face.
 
 **Path**: `./sup_tools/swpilotcli-feature-hole-wizard-straight-tap/`
 
+### swpilotcli-hide-all-sketches
+
+**Description**: Hide every sketch feature in every configuration of the active SolidWorks part or assembly. Retries configurations that do not activate on the first attempt, restores the original configuration, and reports totals and failures. Use as an atomic building block for cleanup workflows. Does not save the document.
+
+**Path**: `./sup_tools/swpilotcli-hide-all-sketches/`
+
 ### swpilotcli-inspect-drawing
 
-**Description**: Full attribute diagnostic tool for the active SolidWorks drawing. Dumps every annotation's complete properties: for dimensions ??name, value, type, text parts (prefix/suffix/callout), tolerance type and values, precision, arrow style, layer, color; for notes ??text content, leader attach point, arrow count and style, angle, layer, color. Also lists all visible geometry vertices with both model and sheet coordinates. Use when debugging dangling repairs, auditing annotation attributes before migration, or understanding drawing geometry for automation development.
+**Description**: Full attribute diagnostic tool for the active SolidWorks drawing. Dumps every annotation's complete properties: for dimensions â€” name, value, type, text parts (prefix/suffix/callout), tolerance type and values, precision, arrow style, layer, color; for notes â€” text content, leader attach point, arrow count and style, angle, layer, color. Also lists all visible geometry vertices with both model and sheet coordinates. Use when debugging dangling repairs, auditing annotation attributes before migration, or understanding drawing geometry for automation development.
 
 **Path**: `./sup_tools/swpilotcli-inspect-drawing/`
 
@@ -161,7 +191,7 @@ User-defined tools that extend SwpilotCLI functionality. Place your custom tools
 
 ### swpilotcli-plot-ic-bisectors-at-68
 
-**Description**: Draw the two perpendicular bisectors and IC intersection for the validated 68 to 68.01 mm example. Reads precise source geometry from ??1 and draws the bisectors into ??5. Use when explaining how the 68 mm IC is constructed geometrically.
+**Description**: Draw the two perpendicular bisectors and IC intersection for the validated 68 to 68.01 mm example. Reads precise source geometry from è‰åœ–1 and draws the bisectors into è‰åœ–5. Use when explaining how the 68 mm IC is constructed geometrically.
 
 **Path**: `./sup_tools/swpilotcli-plot-ic-bisectors-at-68/`
 
@@ -173,7 +203,7 @@ User-defined tools that extend SwpilotCLI functionality. Place your custom tools
 
 ### swpilotcli-plot-p0-p1-on-sketch
 
-**Description**: Plot the validated P0, P1, midpoint, and short P0-P1 chord used in the 68 to 68.01 mm IC explanation. Draws into ??5. Use when you need to show exactly which two positions define the perpendicular bisector construction.
+**Description**: Plot the validated P0, P1, midpoint, and short P0-P1 chord used in the 68 to 68.01 mm IC explanation. Draws into è‰åœ–5. Use when you need to show exactly which two positions define the perpendicular bisector construction.
 
 **Path**: `./sup_tools/swpilotcli-plot-p0-p1-on-sketch/`
 
@@ -185,7 +215,7 @@ User-defined tools that extend SwpilotCLI functionality. Place your custom tools
 
 ### swpilotcli-replace-note-text
 
-**Description**: Find and replace text inside all Note annotations in the active SolidWorks drawing. Requires two arguments: the text to find and the replacement text. Scans every sheet and view, replaces all matching notes, and reports how many were changed. Use as an atomic building block in LLM-orchestrated batch workflows (e.g. open-doc ??replace-note-text ??save-drawing-as-copy ??close-doc). Does NOT save the file ??caller is responsible for saving or discarding.
+**Description**: Find and replace text inside all Note annotations in the active SolidWorks drawing. Requires two arguments: the text to find and the replacement text. Scans every sheet and view, replaces all matching notes, and reports how many were changed. Use as an atomic building block in LLM-orchestrated batch workflows (e.g. open-doc â†’ replace-note-text â†’ save-drawing-as-copy â†’ close-doc). Does NOT save the file â€” caller is responsible for saving or discarding.
 
 **Path**: `./sup_tools/swpilotcli-replace-note-text/`
 
@@ -207,6 +237,12 @@ User-defined tools that extend SwpilotCLI functionality. Place your custom tools
 
 **Path**: `./sup_tools/swpilotcli-set-dimension/`
 
+### swpilotcli-set-scene
+
+**Description**: Set a SolidWorks scene on the active document using a scene name from the installed scene library or a .p2s file path. Supports current or all configurations, optional verification, and optional saving. Defaults to current configuration, verification enabled, and no save. Use as an atomic building block when changing model backgrounds or render scenes; caller controls whether changes are saved.
+
+**Path**: `./sup_tools/swpilotcli-set-scene/`
+
 ### swpilotcli-set-view
 
 **Description**: Set view orientation of the active SolidWorks document. Supported views: front, back, left, right, top, bottom, iso (default), dimetric, trimetric. Calls ShowNamedView2 + ViewZoomtofit2.
@@ -227,7 +263,7 @@ User-defined tools that extend SwpilotCLI functionality. Place your custom tools
 
 ### swpilotcli-sketch-on-face
 
-**Description**: Open a new sketch on a specified face or plane. Accepts either a named plane (e.g. ?皞) or world face coordinates in mm (e.g. 25,10,-20). Enters sketch editing mode and stays there ??follow up with sketch-draw to draw geometry, then extrude-boss or extrude-cut.
+**Description**: Open a new sketch on a specified face or plane. Accepts either a named plane (e.g. å‰åŸºæº–é¢) or world face coordinates in mm (e.g. 25,10,-20). Enters sketch editing mode and stays there â€” follow up with sketch-draw to draw geometry, then extrude-boss or extrude-cut.
 
 **Path**: `./sup_tools/swpilotcli-sketch-on-face/`
 
@@ -252,12 +288,12 @@ To create a new sup tool:
 2. Add required files:
    ``
    your-tool-name/
-   ??? SKILL.md              (required, with YAML frontmatter)
-   ??? API_REFERENCE.md      (recommended)
-   ??? README.md             (recommended)
-   ??? scripts/
-       ??? YourTool/         (your project directory)
-           ??? YourTool.csproj
+   â”œâ”€â”€ SKILL.md              (required, with YAML frontmatter)
+   â”œâ”€â”€ API_REFERENCE.md      (recommended)
+   â”œâ”€â”€ README.md             (recommended)
+   â””â”€â”€ scripts/
+       â””â”€â”€ YourTool/         (your project directory)
+           â””â”€â”€ YourTool.csproj
    ``
 3. Follow the same format as Main Tools for consistency
 4. Run sync-tools.ps1 to update this registry
@@ -273,12 +309,12 @@ All tools in this registry are designed to be directly compatible with Claude Ag
 Ensure your tools follow the official structure:
 ``
 tool-name/
-??? SKILL.md
-??? API_REFERENCE.md (optional)
-??? README.md (optional)
-??? scripts/
-    ??? YourProject/
-        ??? YourProject.csproj
+â”œâ”€â”€ SKILL.md
+â”œâ”€â”€ API_REFERENCE.md (optional)
+â”œâ”€â”€ README.md (optional)
+â””â”€â”€ scripts/
+    â””â”€â”€ YourProject/
+        â””â”€â”€ YourProject.csproj
 ``
 
 ### Step 2: Copy to ~/.claude/skills/
@@ -368,5 +404,5 @@ A: Claude reads this TOOLS.md file and can access any tool directory via bash. S
 
 ## Last Updated
 
-- **Generated**: 2026-04-28 16:47:57
-- **Tools**: 2 Main + 34 Sup tools
+- **Generated**: 2026-09-22 13:48:35
+- **Tools**: 2 Main + 40 Sup tools

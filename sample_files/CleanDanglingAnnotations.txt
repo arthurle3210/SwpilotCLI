@@ -1,0 +1,108 @@
+Option Explicit
+
+' SolidWorks VBA macro source
+' Deletes only dangling dimensions, balloons, centerlines, and center marks
+' from every sheet and drawing view in the active .slddrw document.
+' The macro does not save the drawing.
+
+Dim swApp As SldWorks.SldWorks
+Dim swModel As SldWorks.ModelDoc2
+Dim swDrawing As SldWorks.DrawingDoc
+Dim swView As SldWorks.View
+Dim swAnn As SldWorks.Annotation
+Dim swNextAnn As SldWorks.Annotation
+Dim swNote As SldWorks.Note
+
+Sub main()
+    Dim sheetViews As Variant
+    Dim views As Variant
+    Dim sheetIndex As Long
+    Dim viewIndex As Long
+    Dim annotationType As Long
+    Dim category As String
+    Dim deletedDimensions As Long
+    Dim deletedBalloons As Long
+    Dim deletedCenterlines As Long
+    Dim deletedCentermarks As Long
+    Dim failed As Long
+
+    Set swApp = Application.SldWorks
+    Set swModel = swApp.ActiveDoc
+
+    If swModel Is Nothing Then
+        MsgBox "No active SolidWorks document.", vbExclamation, "Clean Dangling Annotations"
+        Exit Sub
+    End If
+
+    If swModel.GetType <> swDocDRAWING Then
+        MsgBox "This macro can only run on an active .slddrw drawing document.", vbExclamation, "Clean Dangling Annotations"
+        Exit Sub
+    End If
+
+    Set swDrawing = swModel
+    sheetViews = swDrawing.GetViews
+
+    For sheetIndex = LBound(sheetViews) To UBound(sheetViews)
+        views = sheetViews(sheetIndex)
+
+        For viewIndex = LBound(views) To UBound(views)
+            Set swView = views(viewIndex)
+            Set swAnn = swView.GetFirstAnnotation3
+
+            Do While Not swAnn Is Nothing
+                ' Capture the next annotation before deletion changes the current collection.
+                Set swNextAnn = swAnn.GetNext3
+                category = ""
+
+                If swAnn.IsDangling Then
+                    annotationType = swAnn.GetType
+
+                    Select Case annotationType
+                        Case swDisplayDimension
+                            category = "Dimension"
+                        Case swCenterLine
+                            category = "Centerline"
+                        Case swCenterMarkSym
+                            category = "Centermark"
+                        Case swNote
+                            Set swNote = swAnn.GetSpecificAnnotation
+                            If Not swNote Is Nothing Then
+                                If swNote.GetBalloonStyle <> swBS_None Then
+                                    category = "Balloon"
+                                End If
+                            End If
+                    End Select
+
+                    If category <> "" Then
+                        swModel.ClearSelection2 True
+
+                        If swAnn.Select3(False, Nothing) And swModel.Extension.DeleteSelection2(0) Then
+                            Select Case category
+                                Case "Dimension": deletedDimensions = deletedDimensions + 1
+                                Case "Balloon": deletedBalloons = deletedBalloons + 1
+                                Case "Centerline": deletedCenterlines = deletedCenterlines + 1
+                                Case "Centermark": deletedCentermarks = deletedCentermarks + 1
+                            End Select
+                        Else
+                            failed = failed + 1
+                        End If
+                    End If
+                End If
+
+                Set swAnn = swNextAnn
+            Loop
+        Next viewIndex
+    Next sheetIndex
+
+    swModel.ClearSelection2 True
+    swModel.GraphicsRedraw2
+
+    MsgBox "Clean Dangling Annotations complete:" & vbCrLf & vbCrLf & _
+           "Dimensions deleted: " & deletedDimensions & vbCrLf & _
+           "Balloons deleted: " & deletedBalloons & vbCrLf & _
+           "Centerlines deleted: " & deletedCenterlines & vbCrLf & _
+           "Center marks deleted: " & deletedCentermarks & vbCrLf & _
+           "Failed deletions: " & failed & vbCrLf & vbCrLf & _
+           "The drawing has not been saved.", _
+           vbInformation, "Clean Dangling Annotations"
+End Sub

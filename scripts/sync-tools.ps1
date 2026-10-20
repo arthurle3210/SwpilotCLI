@@ -104,7 +104,7 @@ if (Test-Path $mainToolsPath) {
         if ($info) {
             $mainTools += $info
             $toolCount++
-            Write-Host "  ✓ $($info.Name)"
+            Write-Host "  OK $($info.Name)"
         }
     }
 }
@@ -119,7 +119,7 @@ if (Test-Path $supToolsPath) {
         if ($info) {
             $supTools += $info
             $toolCount++
-            Write-Host "  ✓ $($info.Name)"
+            Write-Host "  OK $($info.Name)"
         }
     }
 }
@@ -306,4 +306,4 @@ A: Claude reads this TOOLS.md file and can access any tool directory via bash. S
 
 # Write output
 Set-Content -Path $toolsOutputPath -Value $md -Encoding UTF8
-Write-Host "`n✓ Generated: $toolsOutputPath"
+Write-Host "`nGenerated: $toolsOutputPath"
